@@ -1,17 +1,14 @@
-// Import * as cdk from 'aws-cdk-lib/core';
-// Import { Template } from 'aws-cdk-lib/assertions';
-// Import * as Infra from '../lib/infra-stack';
+import * as cdk from 'aws-cdk-lib/core';
+import * as glottica from '../lib/glottica-stack';
+import { Template } from 'aws-cdk-lib/assertions';
 
-// Example test. To run these tests, uncomment this file along with the
-// Example resource in lib/glottica-stack.ts
-test('SQS Queue Created', () => {
-//   Const app = new cdk.App();
-//     // WHEN
-//   Const stack = new Infra.GlotticaStack(app, 'MyTestStack');
-//     // THEN
-//   Const template = Template.fromStack(stack);
-
-//   Template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
+test('Hosted zone created', () => {
+  const app = new cdk.App();
+  const stack = new glottica.GlotticaStack(app, 'MyTestStack', {
+    cloudFrontCert: 'arn:mock:acm:us-east-1:cert:1',
+  });
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Route53::HostedZone', {
+    Name: 'glottica.org.',
+  });
 });
