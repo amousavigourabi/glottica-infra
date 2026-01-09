@@ -1,4 +1,4 @@
-name: CDK Tests
+name: Validate
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Style check
+        run: npm run lint
 
       - name: Run tests
         run: npm run test
