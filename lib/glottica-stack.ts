@@ -6,16 +6,24 @@ import { ComplianceBucketConstruct } from './compliance-bucket-construct';
 import { ComputeConstruct } from './compute-construct';
 import { Construct } from 'constructs';
 import { DnsConstruct } from './dns-construct';
+import { GitHubIamConstruct } from './github-iam-construct';
 import { TableConstruct } from './table-construct';
 import { TrailConstruct } from './trail-construct';
 
 interface GlotticaStackProps extends cdk.StackProps {
   cloudFrontCert: string,
+  account: string,
+  githubRepo: string,
 }
 
 export class GlotticaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: GlotticaStackProps) {
     super(scope, id, props);
+
+    new GitHubIamConstruct(this, 'GitHubIamConstruct', {
+      awsAccountId: props.account,
+      githubRepo: props.githubRepo,
+    });
 
     const rootDomain = 'glottica.org';
     const apiDomain = 'api.glottica.org';

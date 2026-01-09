@@ -17,6 +17,7 @@ export class DnsConstruct extends Construct {
       });
     } catch (ignore) {
       this.zone = new route53.PublicHostedZone(this, 'HostedZone', {
+        caaAmazon: true,
         zoneName: props.rootDomain,
       });
     }
