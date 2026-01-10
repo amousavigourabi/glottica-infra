@@ -7,6 +7,7 @@ on:
 env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_REGION: ${{ vars.AWS_REGION }}
+  GITHUB_REPOSITORY: ${{ github.repository }}
 
 permissions:
   contents: read
@@ -42,7 +43,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: CDK Synth
-        run: npx cdk synth
+        run: npx cdk synth --verbose --verbose
 
       - name: CDK Deploy
         run: |

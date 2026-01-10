@@ -31,23 +31,8 @@ export class GitHubIamConstruct extends Construct {
       roleName: 'github-actions-role',
     });
 
-    const deploymentRole = new iam.Role(this, 'DeploymentRole', {
-      assumedBy: new iam.ArnPrincipal(githubRole.roleArn),
-      description: 'Deployment role assumed by GitHub actions.',
-      roleName: 'deploymentRole',
-    });
-
-    deploymentRole.addManagedPolicy(
+    githubRole.addManagedPolicy(
       iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'),
-    );
-
-    githubRole.addToPolicy(
-      new iam.PolicyStatement({
-        actions: ['sts:AssumeRole'],
-        resources: [
-          deploymentRole.roleArn,
-        ],
-      }),
     );
   }
 }
