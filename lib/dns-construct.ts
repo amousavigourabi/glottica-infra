@@ -11,15 +11,8 @@ export class DnsConstruct extends Construct {
   constructor(scope: Construct, id: string, props: DnsConstructProps) {
     super(scope, id);
 
-    try {
-      this.zone = route53.HostedZone.fromLookup(this, 'HostedZone', {
-        domainName: props.rootDomain,
-      });
-    } catch (ignore) {
-      this.zone = new route53.PublicHostedZone(this, 'HostedZone', {
-        caaAmazon: true,
-        zoneName: props.rootDomain,
-      });
-    }
+    this.zone = route53.HostedZone.fromLookup(this, 'HostedZone', {
+      domainName: props.rootDomain,
+    });
   }
 }
