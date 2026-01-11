@@ -1,6 +1,7 @@
 name: Deploy
 
 on:
+  workflow_call:
   push:
     branches: [ master ]
 
@@ -23,10 +24,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Validate trigger
+        run: |
+          echo "Workflow triggered by ${{ github.event.repository.full_name }}"
+          case "${{ github.event.repository.full_name }}" in
+            glotticaorg/glottica-backend|glotticaorg/glottica-frontend|glotticaorg/glottica-infra)
+              echo "Triggered by authorized caller, succeeding"
+              exit 0
+              ;;
+            *)
+              echo "Triggered by unauthorized caller, failing"
+            ;;
+          esac
+          exit 1
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          repository: glotticaorg/glottica-infra
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
