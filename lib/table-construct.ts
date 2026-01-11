@@ -26,6 +26,8 @@ export class TableConstruct extends Construct {
       },
     });
 
+    cdk.Tags.of(this.table).add('timestamp', new Date().toISOString());
+
     const backupVault = new backup.BackupVault(this, `BackupVault-${id}`, {
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
