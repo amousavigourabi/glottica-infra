@@ -1,14 +1,6 @@
-# Welcome to your CDK TypeScript project
+![Validate](https://github.com/glotticaorg/glottica-infra/actions/workflows/cdk-validate.yml/badge.svg)
+![Deploy](https://github.com/glotticaorg/glottica-infra/actions/workflows/cdk-deploy.yml/badge.svg)
 
-This is a blank project for CDK development with TypeScript.
+# Glottica infra
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+Sets up the AWS infrastructure
