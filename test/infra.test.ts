@@ -7,7 +7,7 @@ test('Hosted Zone A & AAAA records created', () => {
   const stack = new glottica.GlotticaStack(app, 'MyTestStack', {
     account: '123412341234',
     env: {
-      account: process.env.AWS_ACCOUNT_ID,
+      account: '123412341234',
       region: process.env.AWS_REGION,
     },
   });
